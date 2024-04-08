@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import LogIn from "./LogIn";
+import LogIn from "./";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { UserContext } from "../hooks";

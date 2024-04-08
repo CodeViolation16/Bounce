@@ -2,7 +2,7 @@ import React from "react";
 import "./LogIn.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../hooks";
+import { UserContext } from "../../hooks";
 
 export function LogIn() {
   const [email, setEmail] = React.useState("");
