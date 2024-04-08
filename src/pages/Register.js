@@ -34,7 +34,7 @@ function Register() {
         }),
       })
       console.log(res);
-      if (res.status == 400) {
+      if (res.status !== 200) {
         alert("Creating Account Failed. Try Again");
         return
       }
