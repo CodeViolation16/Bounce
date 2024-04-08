@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import LogIn from "./LogIn";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { userContext } from "../hooks/userContext";
+
 
 function Register() {
   const [action, setAction] = React.useState("Sign In");
