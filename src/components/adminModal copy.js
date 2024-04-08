@@ -27,7 +27,7 @@ const rows = [
 export function DataTable() {
   useEffect(() => {
     // Fetch all users when component mounts
-    fetch("http://localhost:3002/users/all")
+    fetch(process.env.REACT_APP_SERVER_URL + "/users/all")
       .then((res) => res.json())
       .then((data) => {
         // Update the users state with the fetched data

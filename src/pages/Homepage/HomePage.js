@@ -63,7 +63,7 @@ export const Homepage = () => {
 
   useEffect(() => {
     const tempCourtBooked = {};
-    fetch("http://localhost:3002/users/booked")
+    fetch(process.env.REACT_APP_SERVER_URL + "/users/booked")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

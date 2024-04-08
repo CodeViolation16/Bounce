@@ -21,7 +21,7 @@ export function Register() {
     e.preventDefault();
     console.log("buttonClicked");
     try {
-      const res = await fetch("http://localhost:3002/users", {
+      const res = await fetch(process.env.REACT_APP_SERVER_URL + "/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export function Register() {
       setUsername(name);
       setUserId(id);
 
-      const response = await fetch("http://localhost:3002/users/login", {
+      const response = await fetch(process.env.REACT_APP_SERVER_URL + "/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

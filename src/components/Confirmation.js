@@ -63,7 +63,7 @@ function Confirmation({
     }
 
     try {
-      const req = await fetch("http://localhost:3002/users/booking", {
+      const req = await fetch(process.env.REACT_APP_SERVER_URL + "/users/booking", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

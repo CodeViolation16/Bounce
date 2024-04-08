@@ -38,7 +38,7 @@ export function Reset() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:3002/users/reset", {
+      const response = await fetch(process.env.REACT_APP_SERVER_URL + "/users/reset", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export function Reset() {
     console.log("Reached here")
     if (updatedPassword !== confirmNewPassword) return;
     try {
-      const response = await fetch("http://localhost:3002/users/reset/new", {
+      const response = await fetch(process.env.REACT_APP_SERVER_URL + "/users/reset/new", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
