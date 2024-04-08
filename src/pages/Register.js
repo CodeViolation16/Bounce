@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 function Register() {
   const [action, setAction] = React.useState("Sign In");
+  const { setUsername, setUserId, setUser } = useContext(userContext);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -14,7 +15,7 @@ function Register() {
     e.preventDefault();
     console.log("buttonClicked");
     try {
-      fetch("http://localhost:3002/users", {
+      const res = await fetch("http://localhost:3002/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,14 +26,28 @@ function Register() {
           password: password,
           id: id,
         }),
-      }).then((res) => {
-        console.log(res);
-        if (res.status == 400) {
-          alert("Creating Account Failed. Try Again");
-        } else {
-          navigate("/home");
-        }
+      })
+      console.log(res);
+      if (res.status == 400) {
+        alert("Creating Account Failed. Try Again");
+        return
+      }
+      setUsername(name);
+      setUserId(id);
+      const response = await fetch("http://localhost:3002/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: email,
+          password: password,
+        }),
       });
+      const data = await response.json();
+      setUser(data.role)
+      navigate("/home");
+
     } catch (error) {
       console.log(error);
       alert("Creating Account Failed. Try Again");

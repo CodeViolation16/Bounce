@@ -2,11 +2,11 @@ import { createContext } from "react";
 
 const userContext = createContext({
   username: "",
-  setUsername: () => {},
+  setUsername: () => { },
   userId: "",
-  setUserId: () => {},
+  setUserId: () => { },
   user: {},
-  setUser: () => {},
+  setUser: () => { },
 });
 
 export default userContext;
