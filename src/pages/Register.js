@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import LogIn from "./LogIn";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { userContext } from "../hooks/userContext";
+import userContext from "../hooks/userContext";
 
 
 function Register() {
