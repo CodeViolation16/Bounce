@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import LogIn from "./LogIn";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -6,13 +6,17 @@ import userContext from "../hooks/userContext";
 
 
 function Register() {
-  const [action, setAction] = React.useState("Sign In");
   const { setUsername, setUserId, setUser } = useContext(userContext);
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [id, setId] = React.useState("");
+
+  // form state
+  const [action, setAction] = useState("Sign In");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [id, setId] = useState("");
+
   const navigate = useNavigate();
+
   async function handleSubmit(e) {
     e.preventDefault();
     console.log("buttonClicked");
