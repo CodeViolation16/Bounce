@@ -24,7 +24,7 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-export default function DataTable() {
+export function DataTable() {
   useEffect(() => {
     // Fetch all users when component mounts
     fetch("http://localhost:3002/users/all")

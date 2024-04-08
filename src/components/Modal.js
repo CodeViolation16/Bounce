@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import "./Modal.css";
 import Confirmation from "./Confirmation";
-import userContext from "../hooks/userContext";
+import { UserContext } from "../hooks";
 import ConfirmationCancel from "./ConfirmationCancel";
 
-const Modal = ({
+
+export const Modal = ({
   open,
   setOpen,
   days,
@@ -45,7 +46,7 @@ const Modal = ({
     "8:00 - 8:30 pm",
     "8:30 - 9:00 pm",
   ];
-  const { userId } = useContext(userContext);
+  const { userId } = useContext(UserContext);
   const [cancelTime, setCancelTime] = useState();
 
   const toggle = (time) => {
@@ -150,4 +151,3 @@ const Modal = ({
   );
 };
 
-export default Modal;

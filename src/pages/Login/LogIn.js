@@ -2,15 +2,15 @@ import React from "react";
 import "./LogIn.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import userContext from "../hooks/userContext";
+import { UserContext } from "../hooks";
 
-function LogIn() {
+export function LogIn() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState(false);
   const navigate = useNavigate();
 
-  const { setUsername, setUserId, setUser } = useContext(userContext);
+  const { setUsername, setUserId, setUser } = useContext(UserContext);
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -95,4 +95,3 @@ function LogIn() {
   );
 }
 
-export default LogIn;

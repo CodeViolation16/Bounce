@@ -3,7 +3,7 @@ import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
-import userContext from "../hooks/userContext";
+import { UserContext } from "../hooks";
 
 const months = [
   "January",
@@ -30,7 +30,7 @@ function Confirmation({
   setTimes,
   courtBooked,
 }) {
-  const { userId, username } = useContext(userContext);
+  const { userId, username } = useContext(UserContext);
 
   function emailConfirmation() {
     var templateParams = {
@@ -41,16 +41,15 @@ function Confirmation({
           .sort((a, b) => a - b)
           .map((time) => timeIntervals[time])
           .join(", ")}${" "}
-        on ${days[selecteDay]?.dayOfMonth} ${
-        days && days[selecteDay]?.dayName
-      }`,
+        on ${days[selecteDay]?.dayOfMonth} ${days && days[selecteDay]?.dayName
+        }`,
     };
 
     emailjs.send("service_vbrnvm3", "template_0r0gzde", templateParams).then(
-      function (response) {
+      function(response) {
         console.log("SUCCESS!", response.status, response.text);
       },
-      function (err) {
+      function(err) {
         console.log("FAILED...", err);
       }
     );
@@ -63,32 +62,34 @@ function Confirmation({
       return;
     }
 
-    fetch("http://localhost:3002/users/booking", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        courtBooked: courtConfirmation,
-        timeBooked: [...times].map((time) => timeIntervals[time]),
+    try {
+      const req = await fetch("http://localhost:3002/users/booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          courtBooked: courtConfirmation,
+          timeBooked: [...times].map((time) => timeIntervals[time]),
 
-        dayBooked: days[selecteDay].dayOfMonth,
+          dayBooked: days[selecteDay].dayOfMonth,
 
-        monthBooked: months[date.getMonth()],
-        yearBooked: date.getFullYear(),
-        userBooked: userId,
-      }),
-    })
-      .then(() => {
-        setConfirmation(false);
-        setTimes(new Set());
-        setConfirmation(null);
-        toast("Booking Successfully Confirmed");
+          monthBooked: months[date.getMonth()],
+          yearBooked: date.getFullYear(),
+          userBooked: userId,
+        }),
       })
-      .catch((err) => {
-        console.log(err);
-        toast("Booking Failed. Try Again");
-      });
+      setConfirmation(false);
+      setTimes(new Set());
+      setConfirmation(null);
+      toast("Booking Successfully Confirmed");
+
+    }
+    catch (err) {
+      console.log(err);
+      toast("Booking Failed. Try Again");
+    }
+
   }
   return (
     <Div>

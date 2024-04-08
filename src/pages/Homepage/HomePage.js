@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Homepage.css"; // Import your component-specific CSS file
-import userContext from "../hooks/userContext";
-import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Modal from "../components/Modal";
-import { useNavigate } from "react-router-dom";
 
-const Homepage = () => {
+import { Modal } from "../components";
+import { UserContext } from "../hooks";
+
+export const Homepage = () => {
   const [days, setDays] = useState();
   const [selecteDay, setSelecteDay] = useState(2);
-  const { username, userId, user, setUsername } = useContext(userContext);
+  const { username, userId, user, setUsername } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [courtConfirmation, setCourtConfirmation] = useState();
   const [times, setTimes] = useState(new Set());
@@ -164,4 +164,3 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;

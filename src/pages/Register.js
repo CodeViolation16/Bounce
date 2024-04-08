@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import LogIn from "./LogIn";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import userContext from "../hooks/userContext";
+import { UserContext } from "../hooks";
 
 
-function Register() {
-  const { setUsername, setUserId, setUser } = useContext(userContext);
+export function Register() {
+  const { setUsername, setUserId, setUser } = useContext(UserContext);
 
   // form state
   const [action, setAction] = useState("Sign In");
@@ -115,5 +115,3 @@ function Register() {
     </div>
   );
 }
-
-export default Register;

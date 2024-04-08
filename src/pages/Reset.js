@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 
-function Reset() {
+export function Reset() {
   const navigate = useNavigate();
   const [email, setEmail] = React.useState("");
   const [resetInput, setResetInput] = React.useState(false);
@@ -26,10 +26,10 @@ function Reset() {
       message: `This is your secret code: ${randomPassword}`,
     };
     emailjs.send("service_vbrnvm3", "template_0r0gzde", templateParams).then(
-      function (response) {
+      function(response) {
         console.log("SUCCESS!", response.status, response.text);
       },
-      function (err) {
+      function(err) {
         console.log("FAILED...", err);
       }
     );
@@ -151,8 +151,8 @@ function Reset() {
               newPassword
                 ? updatePassword
                 : !resetInput
-                ? handleSubmit
-                : validation
+                  ? handleSubmit
+                  : validation
             }
           >
             {newPassword ? "Update Password" : !resetInput ? "Search" : "Send"}
@@ -167,4 +167,3 @@ function Reset() {
   );
 }
 
-export default Reset;

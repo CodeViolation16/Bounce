@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
-import userContext from "./hooks/userContext";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import Register from "./pages/Register";
-import LogIn from "./pages/LogIn";
-import Reset from "./pages/Reset";
-import AdminModal from "./components/adminModal";
-import DataTable from "./components/adminModal copy";
+
+import { HomePage, LogIn, Reset, Register } from "./pages";
+import { UserContext } from "./hooks";
+import { AdminModal, DataTable } from "./components";
 
 function App() {
-  const [username, setUsername] = useState(localStorage["username"] || "");
 
+  const [username, setUsername] = useState(localStorage["username"] || "");
   useEffect(() => {
     localStorage["username"] = username;
   }, [username]);
@@ -19,12 +16,14 @@ function App() {
   useEffect(() => {
     localStorage["userId"] = userId;
   }, [userId]);
+
   const [user, setUser] = useState(localStorage["user"] || "");
   useEffect(() => {
     localStorage.setItem("user", user);
   }, [user]);
+
   return (
-    <userContext.Provider
+    <UserContext.Provider
       value={{ username, setUsername, userId, setUserId, user, setUser }}
     >
       <Routes>
@@ -37,7 +36,7 @@ function App() {
         <Route exact path="/admin" element={<AdminModal />} />{" "}
         <Route exact path="/admintest" element={<DataTable />} />{" "}
       </Routes>
-    </userContext.Provider>
+    </UserContext.Provider>
   );
 }
 

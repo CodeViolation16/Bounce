@@ -3,7 +3,7 @@ import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
-import userContext from "../hooks/userContext";
+import { UserContext } from "../hooks";
 
 const months = [
   "January",
@@ -29,7 +29,7 @@ function ConfirmationCancel({
   courtConfirmation,
   courtBooked,
 }) {
-  const { userId, username } = useContext(userContext);
+  const { userId, username } = useContext(UserContext);
   function emailConfirmation() {
     var templateParams = {
       to_name: username,
@@ -39,10 +39,10 @@ function ConfirmationCancel({
         ${days && days[selecteDay]?.dayName}`,
     };
     emailjs.send("service_vbrnvm3", "template_0r0gzde", templateParams).then(
-      function (response) {
+      function(response) {
         console.log("SUCCESS!", response.status, response.text);
       },
-      function (err) {
+      function(err) {
         console.log("FAILED...", err);
       }
     );
@@ -54,31 +54,31 @@ function ConfirmationCancel({
       toast("Please Log In");
       return;
     }
-
-    fetch("http://localhost:3002/users/booking", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(
-        courtBooked[
-          courtConfirmation + " -> " + days[selecteDay].dayOfMonth
-        ]?.get(cancelTime)
-      ),
-    })
-      .then(() => {
-        setCancelTime();
-        setCourtBooked((prev) => {
-          const temp = { ...prev };
-          delete temp[courtConfirmation + " -> " + days[selecteDay].dayOfMonth];
-          return temp;
-        });
-        toast("Cancel Successfully");
+    try {
+      const req = await fetch("http://localhost:3002/users/booking", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+          courtBooked[
+            courtConfirmation + " -> " + days[selecteDay].dayOfMonth
+          ]?.get(cancelTime)
+        ),
       })
-      .catch((err) => {
-        console.log(err);
-        toast("Booking Failed. Try Again");
+
+      setCancelTime();
+      setCourtBooked((prev) => {
+        const temp = { ...prev };
+        delete temp[courtConfirmation + " -> " + days[selecteDay].dayOfMonth];
+        return temp;
       });
+      toast("Cancel Successfully");
+    }
+    catch (err) {
+      console.log(err);
+      toast("Booking Failed. Try Again");
+    };
   }
   return (
     <Div>

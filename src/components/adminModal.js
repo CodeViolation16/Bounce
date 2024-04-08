@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function AdminModal() {
+export function AdminModal() {
   // State to store the list of users
   const [users, setUsers] = useState([]);
 
@@ -20,24 +20,25 @@ function AdminModal() {
       });
   }, []); // Empty dependency array to run the effect only once on component mount
 
-  const handleSoftDelete = (userId) => {
+  const handleSoftDelete = async (userId) => {
     console.log(userId);
     // Send a PATCH request to update the delete field to true
-    fetch(`http://localhost:3002/users/${userId}/soft-delete`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ delete: true }),
-    })
-      .then((res) => {
-        console.log(res);
-
-        // If successful, fetch the updated list of users
+    try {
+      const res = await fetch(`http://localhost:3002/users/${userId}/soft-delete`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ delete: true }),
       })
-      .catch((error) => {
-        console.error("Error soft deleting user:", error);
-      });
+      const data = await res.json();
+      console.log(data);
+    }
+
+    // If successful, fetch the updated list of users
+    catch (error) {
+      console.error("Error soft deleting user:", error);
+    };
   };
 
   return (
@@ -54,4 +55,3 @@ function AdminModal() {
   );
 }
 
-export default AdminModal;
