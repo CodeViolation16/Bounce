@@ -33,7 +33,8 @@ function Register() {
           id: id,
         }),
       })
-      console.log(res);
+      const res_data = await res.json();
+      console.log(res_data);
       if (res.status !== 200) {
         alert("Creating Account Failed. Try Again");
         return
