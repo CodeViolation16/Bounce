@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { HomePage, LogIn, Reset, Register } from "./pages";
+import { Homepage, LogIn, Reset, Register } from "./pages";
 import { UserContext } from "./hooks";
 import { AdminModal, DataTable } from "./components";
 
@@ -29,7 +29,7 @@ function App() {
       <Routes>
         <Route exact path="/logIn" element={<LogIn />} />
         {username && username.length > 0 && (
-          <Route exact path="/home" element={<HomePage />} />
+          <Route exact path="/home" element={<Homepage />} />
         )}
         <Route exact path="/reset" element={<Reset />} />
         <Route exact path="/register" element={<Register />} />

@@ -33,6 +33,7 @@ export function Register() {
           id: id,
         }),
       })
+
       const res_data = await res.json();
       console.log(res_data);
       if (res.status !== 200) {
@@ -41,6 +42,7 @@ export function Register() {
       }
       setUsername(name);
       setUserId(id);
+
       const response = await fetch("http://localhost:3002/users/login", {
         method: "POST",
         headers: {
@@ -51,6 +53,7 @@ export function Register() {
           password: password,
         }),
       });
+
       const data = await response.json();
       setUser(data.role)
       navigate("/home");
