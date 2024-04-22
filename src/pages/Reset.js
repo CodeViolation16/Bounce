@@ -21,15 +21,15 @@ export function Reset() {
 
   async function emailConfirmation() {
     var templateParams = {
-      to_name: email,
+      to_email: email,
       from_name: "Tennis Court Booking App",
       message: `This is your secret code: ${randomPassword}`,
     };
     emailjs.send("service_vbrnvm3", "template_0r0gzde", templateParams).then(
-      function(response) {
+      function (response) {
         console.log("SUCCESS!", response.status, response.text);
       },
-      function(err) {
+      function (err) {
         console.log("FAILED...", err);
       }
     );
@@ -38,15 +38,18 @@ export function Reset() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const response = await fetch(process.env.REACT_APP_SERVER_URL + "/users/reset", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: email,
-        }),
-      });
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + "/users/reset",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: email,
+          }),
+        }
+      );
       const data = await response.json();
       if (data.success) {
         setResetInput(true);
@@ -67,19 +70,22 @@ export function Reset() {
   }
   async function updatePassword(event) {
     event.preventDefault();
-    console.log("Reached here")
+    console.log("Reached here");
     if (updatedPassword !== confirmNewPassword) return;
     try {
-      const response = await fetch(process.env.REACT_APP_SERVER_URL + "/users/reset/new", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: email,
-          password: updatedPassword,
-        }),
-      });
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + "/users/reset/new",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: email,
+            password: updatedPassword,
+          }),
+        }
+      );
       const data = await response.json();
       if (data.success) {
         navigate("/login");
@@ -151,8 +157,8 @@ export function Reset() {
               newPassword
                 ? updatePassword
                 : !resetInput
-                  ? handleSubmit
-                  : validation
+                ? handleSubmit
+                : validation
             }
           >
             {newPassword ? "Update Password" : !resetInput ? "Search" : "Send"}
@@ -166,4 +172,3 @@ export function Reset() {
     </div>
   );
 }
-

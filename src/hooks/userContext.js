@@ -2,10 +2,13 @@ import { createContext } from "react";
 
 export const UserContext = createContext({
   username: "",
-  setUsername: () => { },
+  setUsername: () => {},
   userId: "",
-  setUserId: () => { },
+  setUserId: () => {},
   user: {},
-  setUser: () => { },
+  setUser: () => {},
+  emailToSend: {},
+  setEmailToSend: () => {},
+  announce: {},
+  setAnnounce: () => {},
 });
-

@@ -29,9 +29,10 @@ function ConfirmationCancel({
   courtConfirmation,
   courtBooked,
 }) {
-  const { userId, username } = useContext(UserContext);
+  const { userId, username, emailToSend } = useContext(UserContext);
   function emailConfirmation() {
     var templateParams = {
+      to_email: emailToSend,
       to_name: username,
       from_name: "Tennis Court Booking App",
       message: `You Canceled ${timeIntervals[cancelTime]} on
@@ -39,10 +40,10 @@ function ConfirmationCancel({
         ${days && days[selecteDay]?.dayName}`,
     };
     emailjs.send("service_vbrnvm3", "template_0r0gzde", templateParams).then(
-      function(response) {
+      function (response) {
         console.log("SUCCESS!", response.status, response.text);
       },
-      function(err) {
+      function (err) {
         console.log("FAILED...", err);
       }
     );
@@ -55,17 +56,20 @@ function ConfirmationCancel({
       return;
     }
     try {
-      const req = await fetch(process.env.REACT_APP_SERVER_URL + "/users/booking", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(
-          courtBooked[
-            courtConfirmation + " -> " + days[selecteDay].dayOfMonth
-          ]?.get(cancelTime)
-        ),
-      })
+      const req = await fetch(
+        process.env.REACT_APP_SERVER_URL + "/users/booking",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(
+            courtBooked[
+              courtConfirmation + " -> " + days[selecteDay].dayOfMonth
+            ]?.get(cancelTime)
+          ),
+        }
+      );
 
       setCancelTime();
       setCourtBooked((prev) => {
@@ -74,11 +78,10 @@ function ConfirmationCancel({
         return temp;
       });
       toast("Cancel Successfully");
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
       toast("Booking Failed. Try Again");
-    };
+    }
   }
   return (
     <Div>

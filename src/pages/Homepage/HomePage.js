@@ -3,7 +3,7 @@ import "./Homepage.css"; // Import your component-specific CSS file
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Header from "../../components/Header";
 import { Modal } from "../../components";
 import { UserContext } from "../../hooks";
 
@@ -85,17 +85,24 @@ export const Homepage = () => {
     navigate("/login");
   }
 
+  function Admin() {
+    navigate("/admin");
+  }
   return (
     <body>
       <ToastContainer />
-
+      <div>
+        {" "}
+        <Header />{" "}
+      </div>
+      <div className="header">
+        <div>Welcome {username}</div>
+        <div onClick={() => Admin()}>Admin Features</div>
+        <div styled={{ marginRight: "50px" }} onClick={() => logOut()}>
+          Log Out
+        </div>{" "}
+      </div>
       <div className="center">
-        <div onClick={() => logOut()}>Log Out</div>
-        <h1 style={{ textAlign: "center", paddingBottom: "30px" }}>
-          {" "}
-          Welcome {username}
-        </h1>
-
         <div className="tickets">
           <div className="ticket-selector">
             <div className="head">
@@ -163,4 +170,3 @@ export const Homepage = () => {
     </body>
   );
 };
-

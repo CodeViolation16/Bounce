@@ -10,27 +10,25 @@ export function LogIn() {
   const [error, setError] = React.useState(false);
   const navigate = useNavigate();
 
-  const { setUsername, setUserId, setUser } = useContext(UserContext);
+  const { setUsername, setUserId, setUser, setEmailToSend } =
+    useContext(UserContext);
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      const response = await fetch(process.env.REACT_APP_SERVER_URL + "/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: email,
-          password: password,
-        }),
-      });
-
-      if (!response.ok) {
-        console.log("Login failed:", response.statusText);
-
-        return;
-      }
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + "/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: email,
+            password: password,
+          }),
+        }
+      );
       const data = await response.json();
       console.log(data);
 
@@ -39,14 +37,19 @@ export function LogIn() {
         setUserId(data.id);
         setUser(data.role);
         navigate("/home");
-        console.log(data);
+        console.log(data.email);
+        setEmailToSend(data.email);
+      }
+      if (!data.success || data.errorCode == 10001) {
+        console.log("Login failed:", response.statusText);
+        setError(true);
+        return;
       }
 
-      if (data.errorCode == 10001) {
-        setError(true);
-      }
+
     } catch (error) {
       console.error("Error during login:", error);
+      setError(true);
     }
   }
 
@@ -94,4 +97,3 @@ export function LogIn() {
     </div>
   );
 }
-

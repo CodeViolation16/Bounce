@@ -30,26 +30,29 @@ function Confirmation({
   setTimes,
   courtBooked,
 }) {
-  const { userId, username } = useContext(UserContext);
+  const { userId, username, emailToSend } = useContext(UserContext);
 
   function emailConfirmation() {
+    console.log(emailToSend);
     var templateParams = {
       to_name: username,
+      to_email: emailToSend,
       from_name: "Tennis Court Booking App",
       message: `You Booked ${courtConfirmation} ${" "}
         ${[...times]
           .sort((a, b) => a - b)
           .map((time) => timeIntervals[time])
           .join(", ")}${" "}
-        on ${days[selecteDay]?.dayOfMonth} ${days && days[selecteDay]?.dayName
-        }`,
+        on ${days[selecteDay]?.dayOfMonth} ${
+        days && days[selecteDay]?.dayName
+      }`,
     };
 
     emailjs.send("service_vbrnvm3", "template_0r0gzde", templateParams).then(
-      function(response) {
+      function (response) {
         console.log("SUCCESS!", response.status, response.text);
       },
-      function(err) {
+      function (err) {
         console.log("FAILED...", err);
       }
     );
@@ -63,33 +66,33 @@ function Confirmation({
     }
 
     try {
-      const req = await fetch(process.env.REACT_APP_SERVER_URL + "/users/booking", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          courtBooked: courtConfirmation,
-          timeBooked: [...times].map((time) => timeIntervals[time]),
+      const req = await fetch(
+        process.env.REACT_APP_SERVER_URL + "/users/booking",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            courtBooked: courtConfirmation,
+            timeBooked: [...times].map((time) => timeIntervals[time]),
 
-          dayBooked: days[selecteDay].dayOfMonth,
+            dayBooked: days[selecteDay].dayOfMonth,
 
-          monthBooked: months[date.getMonth()],
-          yearBooked: date.getFullYear(),
-          userBooked: userId,
-        }),
-      })
+            monthBooked: months[date.getMonth()],
+            yearBooked: date.getFullYear(),
+            userBooked: userId,
+          }),
+        }
+      );
       setConfirmation(false);
       setTimes(new Set());
       setConfirmation(null);
       toast("Booking Successfully Confirmed");
-
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
       toast("Booking Failed. Try Again");
     }
-
   }
   return (
     <Div>

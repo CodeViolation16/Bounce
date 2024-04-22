@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { UserContext } from "../hooks";
 
-
 export function Register() {
   const { setUsername, setUserId, setUser } = useContext(UserContext);
 
@@ -32,32 +31,33 @@ export function Register() {
           password: password,
           id: id,
         }),
-      })
+      });
 
       const res_data = await res.json();
       console.log(res_data);
       if (res.status !== 200) {
         alert("Creating Account Failed. Try Again");
-        return
+        return;
+      } else {
+        navigate("/home");
       }
-      setUsername(name);
-      setUserId(id);
+      // setUsername(name);
+      // setUserId(id);
 
-      const response = await fetch(process.env.REACT_APP_SERVER_URL + "/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: email,
-          password: password,
-        }),
-      });
+      // const response = await fetch(process.env.REACT_APP_SERVER_URL + "/users/login", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     username: email,
+      //     password: password,
+      //   }),
+      // });
 
-      const data = await response.json();
-      setUser(data.role)
-      navigate("/home");
-
+      // const data = await response.json();
+      // setUser(data.role)
+      // navigate("/home");
     } catch (error) {
       console.log(error);
       alert("Creating Account Failed. Try Again");

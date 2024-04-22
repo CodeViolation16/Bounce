@@ -1,8 +1,9 @@
 body {
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   margin: 0;
   padding: 0;
+
 }
 .center {
   width: 100%;
@@ -249,4 +250,81 @@ input[type="checkbox"],
 input:checked + label {
   background: rgb(13 14 13);
   color: white;
+}
+.header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 50px;
+  margin-right: 30px;
+  margin-top: 50px;
+  font-size: 18px;
+}
+
+/* Adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .center {
+    padding: 0 20px; /* Adjust padding for smaller screens */
+  }
+
+  .tickets {
+    width: 100%; /* Make tickets container full width */
+    max-width: none; /* Remove max-width */
+  }
+
+  .seats {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(80px, 1fr)
+    ); /* Adjust grid layout for smaller screens */
+  }
+
+  .all-seats {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(30px, 1fr)
+    ); /* Adjust grid layout for smaller screens */
+    grid-gap: 10px; /* Adjust grid gap */
+  }
+
+  .head {
+    flex-direction: column; /* Stack elements vertically */
+    margin-bottom: 20px; /* Adjust margin */
+  }
+
+  .dates-item {
+    width: 40px; /* Adjust date item width */
+    height: 30px; /* Adjust date item height */
+    font-size: 10px; /* Adjust font size */
+  }
+
+  .times {
+    flex-direction: column; /* Stack elements vertically */
+  }
+
+  .time {
+    width: 100%; /* Make time buttons full width */
+    margin-bottom: 10px; /* Adjust margin between time buttons */
+  }
+}
+
+/* Adjustments for smaller font sizes */
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 14px; /* Decrease font size */
+  }
+
+  .price button {
+    font-size: 12px; /* Decrease font size */
+    padding: 5px 10px; /* Adjust padding */
+  }
+
+  .header {
+    font-size: 16px; /* Decrease font size */
+    gap: 20px; /* Adjust gap */
+  }
+}
+
+.nounce {
+  margin-top: 20px;
+  text-align: center;
 }

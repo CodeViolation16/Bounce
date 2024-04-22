@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@devexpress/dx-react-grid": "^4.0.8",
+    "@devexpress/dx-react-grid-material-ui": "^4.0.8",
     "@emailjs/browser": "^4.3.3",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -12,9 +14,12 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "devextreme": "23.2.4",
+    "devextreme-react": "23.2.4",
     "nodemailer": "^6.9.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-fast-marquee": "^1.6.4",
     "react-router-dom": "^6.22.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
@@ -44,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "devextreme-themebuilder": "23.2.4"
   }
 }
