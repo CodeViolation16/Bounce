@@ -32,7 +32,7 @@ export const Homepage = () => {
   ];
 
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
     if (user === "admin") {
       setAdmin(true);
     }
@@ -58,7 +58,7 @@ export const Homepage = () => {
     }
 
     setDays(next7Days);
-    console.log(next7Days);
+
   }, []);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export const Homepage = () => {
     fetch(process.env.REACT_APP_SERVER_URL + "/users/booked")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
 
         data.map((item) => {
           const court = item.courtBooked,
@@ -120,7 +120,7 @@ export const Homepage = () => {
                   onClick={() => {
                     setOpen(true);
                     setCourtConfirmation(child);
-                    console.log(courtConfirmation);
+                    // console.log(courtConfirmation);
                   }}
                 >
                   {" "}
