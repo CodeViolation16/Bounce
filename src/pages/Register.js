@@ -36,28 +36,14 @@ export function Register() {
       const res_data = await res.json();
       console.log(res_data);
       if (res.status !== 200) {
-        alert("Creating Account Failed. Try Again");
+        if (res_data.message === "Username already exists") {
+          alert("Username already exists. Please choose a different one.");
+        } else {
+          alert("Creating Account Failed. Try Again");
+        }
         return;
-      } else {
-        navigate("/home");
       }
-      // setUsername(name);
-      // setUserId(id);
-
-      // const response = await fetch(process.env.REACT_APP_SERVER_URL + "/users/login", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     username: email,
-      //     password: password,
-      //   }),
-      // });
-
-      // const data = await response.json();
-      // setUser(data.role)
-      // navigate("/home");
+      navigate("/home");
     } catch (error) {
       console.log(error);
       alert("Creating Account Failed. Try Again");

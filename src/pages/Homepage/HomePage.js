@@ -32,11 +32,7 @@ export const Homepage = () => {
   ];
 
   useEffect(() => {
-    // console.log(user);
-    if (user === "admin") {
-      setAdmin(true);
-    }
-
+    console.log(user);
     const currentDate = new Date();
 
     const next7Days = [];
@@ -58,10 +54,10 @@ export const Homepage = () => {
     }
 
     setDays(next7Days);
-
   }, []);
 
   useEffect(() => {
+    console.log(user);
     const tempCourtBooked = {};
     fetch(process.env.REACT_APP_SERVER_URL + "/users/booked")
       .then((res) => res.json())
@@ -97,7 +93,9 @@ export const Homepage = () => {
       </div>
       <div className="header">
         <div>Welcome {username}</div>
-        <div onClick={() => Admin()}>Admin Features</div>
+        {user == "admin" && (
+          <div onClick={() => Admin()}>Admin Features</div>
+        )}
         <div styled={{ marginRight: "50px" }} onClick={() => logOut()}>
           Log Out
         </div>{" "}

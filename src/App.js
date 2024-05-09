@@ -20,8 +20,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem("user", user);
   }, [user]);
-  const [emailToSend, setEmailToSend] = useState("");
-  const [announce, setAnnounce] = useState("");
+  const [emailToSend, setEmailToSend] = useState(localStorage["email"] || "");
+  useEffect(() => {
+    localStorage["email"] = emailToSend;
+  }, [emailToSend]);
   return (
     <UserContext.Provider
       value={{
@@ -33,15 +35,13 @@ function App() {
         setUser,
         emailToSend,
         setEmailToSend,
-        announce,
-        setAnnounce,
       }}
     >
       <Routes>
         <Route exact path="/logIn" element={<LogIn />} />
-        {username && username.length > 0 && (
-          <Route exact path="/home" element={<Homepage />} />
-        )}
+        {/* {username && username.length > 0 && ( */}
+        <Route exact path="/home" element={<Homepage />} />
+        {/*  */}
         <Route exact path="/reset" element={<Reset />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/admin" element={<Admin />} />{" "}

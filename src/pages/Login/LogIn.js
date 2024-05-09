@@ -12,6 +12,7 @@ export function LogIn() {
 
   const { setUsername, setUserId, setUser, setEmailToSend } =
     useContext(UserContext);
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -37,16 +38,16 @@ export function LogIn() {
         setUserId(data.id);
         setUser(data.role);
         navigate("/home");
-        console.log(data.email);
+        console.log(data.role);
+
         setEmailToSend(data.email);
+        console.log(data.role);
       }
       if (!data.success || data.errorCode == 10001) {
         console.log("Login failed:", response.statusText);
         setError(true);
         return;
       }
-
-
     } catch (error) {
       console.error("Error during login:", error);
       setError(true);

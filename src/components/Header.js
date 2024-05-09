@@ -4,34 +4,27 @@ import Marquee from "react-fast-marquee";
 import { UserContext } from "../hooks";
 
 function Header() {
-  const { announce } = useContext(UserContext);
-  const [announcement, setAnnouncement] = useState("");
+  const [announcement, setAnnouncement] = useState();
 
   useEffect(() => {
-    setAnnouncement(announce);
-  }, [announce]);
-
-  console.log(announcement);
+    fetch(process.env.REACT_APP_SERVER_URL + "/users/get")
+      .then((res) => res.json())
+      .then((data) => {
+        setAnnouncement(data[0].content);
+       console.log(data)
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error);
+      });
+  }, []);
 
   return (
     <StyledDiv style={{ backgroundColor: "black" }}>
       <Marquee speed={30}>
         <div className="announcement">
-          {/* <marquee
-            behavior="scroll"
-            direction="left"
-            scrollamount="60"
-            onMouseOver={() => this.stop()}
-            onMouseOut={() => this.start()}
-          > */}
           <div className="announcement-text text1">
-            <span>
-              Annoucement: Court 4 will be under maintainence on this Wednesday
-              {announcement}
-            </span>
+            <span>Annoucement:{announcement}</span>
           </div>
-
-          {/* </marquee> */}
         </div>
       </Marquee>
     </StyledDiv>

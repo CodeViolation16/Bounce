@@ -76,15 +76,14 @@ function Confirmation({
           body: JSON.stringify({
             courtBooked: courtConfirmation,
             timeBooked: [...times].map((time) => timeIntervals[time]),
-
             dayBooked: days[selecteDay].dayOfMonth,
-
             monthBooked: months[date.getMonth()],
             yearBooked: date.getFullYear(),
             userBooked: userId,
           }),
         }
       );
+
       setConfirmation(false);
       setTimes(new Set());
       setConfirmation(null);

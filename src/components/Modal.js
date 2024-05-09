@@ -4,7 +4,6 @@ import Confirmation from "./Confirmation";
 import { UserContext } from "../hooks";
 import ConfirmationCancel from "./ConfirmationCancel";
 
-
 export const Modal = ({
   open,
   setOpen,
@@ -14,8 +13,9 @@ export const Modal = ({
   setTimes,
   courtConfirmation,
   courtBooked,
-  setCourtBooked
+  setCourtBooked,
 }) => {
+  const [realTime, setRealTime] = useState();
   const [timeSelected, setTimeSelected] = useState([]);
   const [confirmation, setConfirmation] = useState(false);
   const timeIntervals = [
@@ -78,31 +78,35 @@ export const Modal = ({
       <div className="content-container" onClick={(e) => e.stopPropagation()}>
         <div className="times-container">
           {timeIntervals.map((timeName, index) => {
-            const booker = courtBooked[
-              courtConfirmation + " -> " + days[selecteDay].dayOfMonth
-            ]?.get(timeName)
-            return <button
-              key={index}
-              className={
-                "time" +
-                (booker
-                  ? (
-                    booker.userBooked === userId
+            const booker =
+              courtBooked[
+                courtConfirmation + " -> " + days[selecteDay].dayOfMonth
+              ]?.get(timeName);
+            return (
+              <button
+                key={index}
+                className={
+                  "time" +
+                  (booker
+                    ? booker.userBooked === userId
                       ? " user-booked booked"
                       : " booked"
-                  )
-                  : times.has(index)
+                    : times.has(index)
                     ? " selected"
-                    : ""
-                )
-              }
-              onClick={() => toggle(index)}
-            // disabled={courtBooked[
-            //   courtConfirmation + " -> " + days[selecteDay].dayOfMonth
-            // ]?.has(timeName)}
-            >
-              {timeName}
-            </button>
+                    : "")
+                }
+                onClick={() => {
+                  toggle(index);
+                  console.log(timeName);
+                  setRealTime(timeName);
+                }}
+                // disabled={courtBooked[
+                //   courtConfirmation + " -> " + days[selecteDay].dayOfMonth
+                // ]?.has(timeName)}
+              >
+                {timeName}
+              </button>
+            );
           })}
         </div>
         <div className="price">
@@ -132,6 +136,7 @@ export const Modal = ({
         )}
         {!isNaN(cancelTime) ? (
           <ConfirmationCancel
+            realTime={realTime}
             courtBooked={courtBooked}
             cancelTime={cancelTime}
             setCancelTime={setCancelTime}
@@ -145,9 +150,10 @@ export const Modal = ({
             setTimes={setTimes}
             setCourtBooked={setCourtBooked}
           />
-        ) : <></>}
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
 };
-

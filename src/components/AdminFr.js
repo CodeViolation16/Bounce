@@ -76,11 +76,30 @@ function AdminFr() {
     setAnnounce(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setAnnounce(announce);
     setAnnounce("");
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_SERVER_URL + "/users/send",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content: announce,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <StyledDiv>
       <table>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../hooks";
 
 const months = [
@@ -20,6 +20,7 @@ const months = [
   "December",
 ];
 function ConfirmationCancel({
+  realTime,
   setCancelTime,
   cancelTime,
   timeIntervals,
@@ -28,6 +29,8 @@ function ConfirmationCancel({
   selecteDay,
   courtConfirmation,
   courtBooked,
+  times,
+  time,
 }) {
   const { userId, username, emailToSend } = useContext(UserContext);
   function emailConfirmation() {
@@ -49,6 +52,12 @@ function ConfirmationCancel({
     );
   }
 
+  useEffect(() => {
+    return () => {
+      console.log(emailToSend);
+    };
+  }, []);
+
   async function bookCourt() {
     const date = new Date();
     if (!userId || userId === "") {
@@ -57,17 +66,20 @@ function ConfirmationCancel({
     }
     try {
       const req = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/users/booking",
+        process.env.REACT_APP_SERVER_URL + "/users/delete",
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(
-            courtBooked[
-              courtConfirmation + " -> " + days[selecteDay].dayOfMonth
-            ]?.get(cancelTime)
-          ),
+          body: JSON.stringify({
+            courtBooked: courtConfirmation,
+            timeBooked: realTime,
+            dayBooked: days[selecteDay].dayOfMonth,
+            monthBooked: months[date.getMonth()],
+            yearBooked: date.getFullYear(),
+            userBooked: userId,
+          }),
         }
       );
 
