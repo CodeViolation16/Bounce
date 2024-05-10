@@ -25,12 +25,10 @@ function AdminFr() {
   const [users, setUsers] = useState([]);
   const [firstOpen, setFirstOpen] = useState();
   const [userIdToDelete, setUserIdToDelete] = useState(null);
-  const { setAnnounce, announce } = useContext(UserContext);
   useEffect(() => {
     fetch(process.env.REACT_APP_SERVER_URL + "/users/all")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         const filteredUsers = data.filter((user) => !user.delete);
         setUsers(filteredUsers);
       })
@@ -73,13 +71,13 @@ function AdminFr() {
   const [announcement, setAnnouncement] = useState("");
 
   const handleChange = (event) => {
-    setAnnounce(event.target.value);
+    setAnnouncement(event.target.value);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setAnnounce(announce);
-    setAnnounce("");
+    setAnnouncement(announcement);
+    setAnnouncement("");
     try {
       const response = await fetch(
         process.env.REACT_APP_SERVER_URL + "/users/send",
@@ -89,7 +87,7 @@ function AdminFr() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            content: announce,
+            content: announcement,
           }),
         }
       );
@@ -155,7 +153,7 @@ function AdminFr() {
           <div className="announce">Make an announcement</div>
           <input
             type="text"
-            value={announce}
+            value={announcement}
             onChange={handleChange}
             placeholder="Type your announcement here"
             className="input"
