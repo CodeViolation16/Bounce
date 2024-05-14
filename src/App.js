@@ -39,9 +39,9 @@ function App() {
     >
       <Routes>
         <Route exact path="/logIn" element={<LogIn />} />
-        {/* {username && username.length > 0 && ( */}
-        <Route exact path="/home" element={<Homepage />} />
-        {/*  */}
+        {username && username.length > 0 && (
+          <Route exact path="/home" element={<Homepage />} />
+        )}
         <Route exact path="/reset" element={<Reset />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/admin" element={<Admin />} />{" "}
