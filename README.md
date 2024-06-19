@@ -1,70 +1,42 @@
-# Tennis Club Booking API
+# Tennis Club Booking App
 
-## Setup and Running Locally
+## Overview
 
-1. Clone this repository.
-2. Install dependencies with `npm install`.
-3. Set up environment variables as described in `.env.example`.
-4. Start the server with `npm start`.
+The Tennis Club Booking App is a web application developed using the MERN stack (MongoDB, Express.js, React.js, Node.js). Follow rules of Chancellors Family Tennis Center. The primary goal of this application is to streamline the process of booking, canceling, and adjusting tennis courts for both clubs and users, eliminating the need for traditional phone calls and saving time for all parties involved.
 
-## API Documentation
+### Features
 
-### Users
+- **User Booking Management**: Users can book, cancel, and adjust tennis court bookings via the web interface.
+- **Admin Features**: Clubs have access to admin features to manage users, court times, and view statistic (future features).
+- **Dynamic Booking**: Users can only book up to 7 days in advance, with the application employing an algorithm to dynamically update available slots for the next 7 days.
+- **Email Confirmation**: Users receive email confirmations after successfully booking or canceling a court.
+- Responsive CSS
+- Reseting Password Feature
+- Protected Routes
+- Backend Hashing Password
 
-#### Create a new user
 
-- **Endpoint**: `POST /api/users`
-- **Description**: Creates a new user account.
-- **Request Body**:
-  - `email` (string): User's email address.
-  - `password` (string): User's password.
-- **Response**: Returns the newly created user object.
+## Authentication
 
-#### Log in an existing user
+- Users can sign in with their email and password.
+- New users can register for an account using their email and password.
+- Users remain signed in even after refreshing the page for a seamless experience.
 
-- **Endpoint**: `POST /api/users/login`
-- **Description**: Logs in an existing user.
-- **Request Body**:
-  - `email` (string): User's email address.
-  - `password` (string): User's password.
-- **Response**: Returns a JWT token for authentication.
+## Usage
 
-### Court
+To use the Tennis Club Booking App:
 
-#### Book a tennis court
+1. Register for an account or log in with existing credentials.
+2. Browse available tennis courts and select desired booking slots.
+3. Receive email confirmation upon successful booking or cancellation.
+4. Admins can manage users, court times, and view statistics through the admin panel.
 
-- **Endpoint**: `POST /api/court/booking`
-- **Description**: Allows a user to book a tennis court.
-- **Request Body**:
-  - `courtId` (string): ID of the tennis court to book.
-  - `userId` (string): ID of the user booking the court.
-  - `dateTime` (string): Date and time of the booking.
-- **Response**: Returns confirmation of the booking.
+## Future Improvements
 
-#### Get information about booked courts
+- Implement additional features such as notifications for upcoming bookings.
+- Enhance admin features for better user management and analytics.
+- Improve user interface for a more intuitive booking experience.
 
-- **Endpoint**: `GET /api/court/booked`
-- **Description**: Retrieves information about currently booked courts.
-- **Response**: Returns a list of booked courts with details.
+## Conclusion
 
-#### Cancel a booked court
-
-- **Endpoint**: `DELETE /api/court/booking`
-- **Description**: Cancels a booked tennis court.
-- **Request Body**:
-  - `bookingId` (string): ID of the booking to cancel.
-- **Response**: Returns confirmation of the cancellation.
-
-## Entity-Relationship Diagram
-
-+-----------+          +------------+
-|   User    |          |   Court    |
-+-----------+          +------------+
-|   _id     |1         |   _id      |
-|   name    |----------| timeBooked |
-|username   |          | courtBooked|
-| password  |          | dayBooked  |
-|   id      |          | userBooked |1
-|  delete   |          | yearBooked |
-|   role    |          | monthBooked|
-+-----------+          +------------+
+The Tennis Club Booking App provides a convenient and efficient solution for managing tennis court bookings, benefiting both clubs and users by saving time and streamlining the booking process. With its user-friendly interface and robust features, it aims to enhance the overall tennis club experience.
