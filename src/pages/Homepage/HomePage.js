@@ -93,9 +93,8 @@ export const Homepage = () => {
       </div>
       <div className="header">
         <div>Welcome {username}</div>
-        {user == "admin" && (
-          <div onClick={() => Admin()}>Admin Features</div>
-        )}
+        <div>Profile Setting</div>
+        {user == "admin" && <div onClick={() => Admin()}>Admin Features</div>}
         <div styled={{ marginRight: "50px" }} onClick={() => logOut()}>
           Log Out
         </div>{" "}
