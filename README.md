@@ -5,6 +5,7 @@
 The Tennis Club Booking App is a web application developed using the MERN stack (MongoDB, Express.js, React.js, Node.js). Follow rules of Chancellors Family Tennis Center. The primary goal of this application is to streamline the process of booking, canceling, and adjusting tennis courts for both clubs and users, eliminating the need for traditional phone calls and saving time for all parties involved.
 
 Demo here (without having to log in): https://finalproject-yscx.onrender.com/home
+
 ### Features
 
 - **User Booking Management**: Users can book, cancel, and adjust tennis court bookings via the web interface.
@@ -16,12 +17,12 @@ Demo here (without having to log in): https://finalproject-yscx.onrender.com/hom
 - Protected Routes
 - Backend Hashing Password
 
-
 ## Authentication
 
 - Users can sign in with their email and password.
 - New users can register for an account using their email and password.
 - Users remain signed in even after refreshing the page for a seamless experience.
+
 ## API Endpoints
 
 ### Users
@@ -32,6 +33,7 @@ Demo here (without having to log in): https://finalproject-yscx.onrender.com/hom
 - `POST /users/reset`: Reset the password for a user.
 - `GET /users/all`: display all users.
 - `PUT /users/:userId/soft-delete`: soft deleting users.
+
 ### Court
 
 - `POST /court/booking`: Book a tennis court.
