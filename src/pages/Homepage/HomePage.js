@@ -93,7 +93,7 @@ export const Homepage = () => {
       </div>
       <div className="header">
         <div>Welcome {username}</div>
-        <div>Profile Setting</div>
+        {/* <div>Profile Setting</div> */}
         {user == "admin" && <div onClick={() => Admin()}>Admin Features</div>}
         <div styled={{ marginRight: "50px" }} onClick={() => logOut()}>
           Log Out
@@ -107,7 +107,7 @@ export const Homepage = () => {
             </div>
             <div className="status">
               <div className="item">Available</div>
-              <div className="item">Booked</div>
+              {/* <div className="item">Booked</div> */}
               <div className="item">Selected</div>
             </div>
             <div className="seats">
