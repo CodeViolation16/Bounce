@@ -9,7 +9,7 @@ export function Register() {
 
   // form state
   const [action, setAction] = useState("Sign In");
-  const [name, setName] = useState("");
+  const [create_name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [id, setId] = useState("");
@@ -26,7 +26,7 @@ export function Register() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: name,
+          name: create_name,
           username: email,
           password: password,
           id: id,
@@ -34,7 +34,6 @@ export function Register() {
       });
 
       const res_data = await res.json();
-      console.log(res_data);
       if (res.status !== 200) {
         if (res_data.message === "Username already exists") {
           alert("Username already exists. Please choose a different one.");
@@ -43,6 +42,10 @@ export function Register() {
         }
         return;
       }
+      const { token, name } = res_data;
+      localStorage.setItem("token", token);
+      setUsername(name);
+      localStorage.setItem("name", name);
       navigate("/home");
     } catch (error) {
       console.log(error);
@@ -59,7 +62,7 @@ export function Register() {
           <input
             type="text"
             name="name"
-            value={name}
+            value={create_name}
             onChange={(e) => setName(e.target.value)}
           />
         </label>

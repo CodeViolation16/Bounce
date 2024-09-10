@@ -31,17 +31,15 @@ export function LogIn() {
         }
       );
       const data = await response.json();
-      console.log(data);
 
       if (data.success) {
         setUsername(data.username);
         setUserId(data.id);
         setUser(data.role);
         navigate("/home");
-        console.log(data.role);
+       
 
         setEmailToSend(data.email);
-        console.log(data.role);
       }
       if (!data.success || data.errorCode == 10001) {
         console.log("Login failed:", response.statusText);
