@@ -1,13 +1,11 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import "./AdminFr.css";
 import styled from "styled-components";
-import BasicModal from "./DeleteModal";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { UserContext } from "../hooks";
 
 const style = {
   position: "absolute",
@@ -26,7 +24,7 @@ function AdminFr() {
   const [firstOpen, setFirstOpen] = useState();
   const [userIdToDelete, setUserIdToDelete] = useState(null);
   useEffect(() => {
-    fetch(process.env.REACT_APP_SERVER_URL + "/users/all")
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users/all`)
       .then((res) => res.json())
       .then((data) => {
         const filteredUsers = data.filter((user) => !user.delete);
@@ -80,7 +78,7 @@ function AdminFr() {
     setAnnouncement("");
     try {
       const response = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/users/send",
+        `${process.env.REACT_APP_SERVER_URL}/users/send`,
         {
           method: "POST",
           headers: {

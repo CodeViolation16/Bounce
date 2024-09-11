@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Homepage.css"; // Import your component-specific CSS file
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Header from "../../components/Header";
 import { Modal } from "../../components";
 import { UserContext } from "../../hooks";
@@ -59,7 +58,7 @@ export const Homepage = () => {
   useEffect(() => {
     // console.log(user);
     const tempCourtBooked = {};
-    fetch(process.env.REACT_APP_SERVER_URL + "/users/booked")
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users/booked`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
@@ -95,9 +94,9 @@ export const Homepage = () => {
         <div>Welcome {username}</div>
         {/* <div>Profile Setting</div> */}
         {/* {user == "admin" && <div onClick={() => Admin()}>Admin Features</div>} */}
-        {/* <div styled={{ marginRight: "50px" }} onClick={() => logOut()}>
+        <div styled={{ marginRight: "50px" }} onClick={() => logOut()}>
           Log Out
-        </div>{" "} */}
+        </div>{" "}
       </div>
       <div className="center">
         <div className="tickets">
@@ -111,9 +110,10 @@ export const Homepage = () => {
               <div className="item">Selected</div>
             </div>
             <div className="seats">
-              {courtButtons.map((child) => (
+              {courtButtons.map((child, idx) => (
                 <button
                   className="courtButtons"
+                  key={idx}
                   onClick={() => {
                     setOpen(true);
                     setCourtConfirmation(child);
@@ -131,6 +131,7 @@ export const Homepage = () => {
                   days.map((day, key) => (
                     <>
                       <input
+                        key={key}
                         type="radio"
                         name="date"
                         id={"d" + (key + 1)}

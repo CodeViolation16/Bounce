@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import emailjs from "@emailjs/browser";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { UserContext } from "../hooks";
@@ -67,7 +67,7 @@ function Confirmation({
 
     try {
       const req = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/users/booking",
+        `${process.env.REACT_APP_SERVER_URL}/users/booking`,
         {
           method: "POST",
           headers: {

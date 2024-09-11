@@ -39,7 +39,7 @@ export function Reset() {
     event.preventDefault();
     try {
       const response = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/users/reset",
+        `${process.env.REACT_APP_SERVER_URL}/users/reset`,
         {
           method: "POST",
           headers: {
@@ -74,7 +74,7 @@ export function Reset() {
     if (updatedPassword !== confirmNewPassword) return;
     try {
       const response = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/users/reset/new",
+        `${process.env.REACT_APP_SERVER_URL}/users/reset/new`,
         {
           method: "PUT",
           headers: {

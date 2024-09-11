@@ -1,17 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Marquee from "react-fast-marquee";
-import { UserContext } from "../hooks";
 
 function Header() {
   const [announcement, setAnnouncement] = useState();
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_SERVER_URL + "/users/get")
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users/get`)
       .then((res) => res.json())
       .then((data) => {
         setAnnouncement(data[0].content);
-       console.log(data)
+        console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching users:", error);

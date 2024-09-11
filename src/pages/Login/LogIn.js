@@ -18,7 +18,7 @@ export function LogIn() {
 
     try {
       const response = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/users/login",
+        `${process.env.REACT_APP_SERVER_URL}/users/login`,
         {
           method: "POST",
           headers: {
@@ -37,7 +37,6 @@ export function LogIn() {
         setUserId(data.id);
         setUser(data.role);
         navigate("/home");
-       
 
         setEmailToSend(data.email);
       }

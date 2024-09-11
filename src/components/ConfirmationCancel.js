@@ -66,7 +66,7 @@ function ConfirmationCancel({
     }
     try {
       const req = await fetch(
-        process.env.REACT_APP_SERVER_URL + "/users/delete",
+        `${process.env.REACT_APP_SERVER_URL}/users/delete`,
         {
           method: "DELETE",
           headers: {
