@@ -30,14 +30,14 @@ export function LogIn() {
           }),
         }
       );
-      const data = await response.json();
-
+      const temp = await response.text();
+      console.log("data:", temp);
+      const data = JSON.parse(temp);
       if (data.success) {
         setUsername(data.username);
         setUserId(data.id);
         setUser(data.role);
         navigate("/home");
-
         setEmailToSend(data.email);
       }
       if (!data.success || data.errorCode == 10001) {
