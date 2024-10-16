@@ -78,6 +78,17 @@ export const Homepage = () => {
 
   function logOut() {
     navigate("/login");
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+  }
+  function profileSetting() {
+    return;
+    <div className="profile_container">
+      <div>
+        <input placeholder="Change Name" />
+        <input placeholder="Change Email" />
+      </div>
+    </div>;
   }
 
   function Admin() {
@@ -94,6 +105,9 @@ export const Homepage = () => {
         <div>Welcome {username}</div>
         {/* <div>Profile Setting</div> */}
         {/* {user == "admin" && <div onClick={() => Admin()}>Admin Features</div>} */}
+        {/* <div styled={{ marginRight: "50px" }} onClick={() => profileSetting()}>
+          Profile Setting
+        </div>{" "} */}
         <div styled={{ marginRight: "50px" }} onClick={() => logOut()}>
           Log Out
         </div>{" "}

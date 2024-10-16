@@ -30,9 +30,7 @@ export function LogIn() {
           }),
         }
       );
-      const temp = await response.text();
-      console.log("data:", temp);
-      const data = JSON.parse(temp);
+      const data = await response.json();
       if (data.success) {
         setUsername(data.username);
         setUserId(data.id);
